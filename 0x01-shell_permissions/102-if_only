@@ -1,0 +1,2 @@
+#!/bin/bash
+["$(stat -c '%U' hello 2>/dev/null)" == "guilaume"] && chown betty hello ||echo "user does not exists"
