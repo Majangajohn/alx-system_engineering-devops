@@ -1,2 +1,3 @@
 #!/bin/bash
-ls -lt --ignore="*/" | grep '^-' | head -n 10 | awk '{print $9}'
+find . -type f -printf '%T@ %p\n' | sort -n -r | head -n 10 | cut -d' ' -f2- | xargs -n 1 basename
+
