@@ -1,4 +1,2 @@
 #!/bin/bash
-find . -type f -printf '%T@ %p\n' | sort -n -r | head -n 10 | cut -d' ' -f2-
-
-
+ls -t | head -n 10
