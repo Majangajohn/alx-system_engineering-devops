@@ -1,3 +1,4 @@
 #!/bin/bash
-echo -e "apple\nbanana\napple\ncherry\ndate\nbanana\nelderberry" | uniq -u | sort
+echo -e "apple\nbanana\napple\ncherry\ndate\nbanana\nelderberry" | sort | uniq -u | sort
+
 
