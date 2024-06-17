@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -d .*/ | grep -vE '^./$|^../$' | wc -l
+ls -d .*/ */ | grep -vE '^./$|^../$' | wc -l
