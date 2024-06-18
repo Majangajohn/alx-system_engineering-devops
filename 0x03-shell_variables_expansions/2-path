@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $PATH
+source ~/.bashrc; echo $PATH
