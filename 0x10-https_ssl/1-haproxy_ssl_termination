@@ -8,11 +8,6 @@ global
         group haproxy
         daemon
 
-        # Max connections
-        maxconn 2048
-        # Configure max size of temporary DHE keys that are generated
-        tune.ssl.default-dh-param 2048
-
         # Default SSL material locations
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
@@ -37,24 +32,16 @@ defaults
         errorfile 502 /etc/haproxy/errors/502.http
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
-frontend www-frontend
-        bind *:88
-         http-request set-header X-Forwarded-Proto http
-        # if configuration for certbot pass to certbot backend
-        acl letsencrypt-acl path_beg /.well-known/acme-challenge/
-        use_backend le-certbot-backend if letsencrypt-acl
+frontend https_front
+    bind *:443 ssl crt /etc/letsencrypt/live/www.allnmj.tech/haproxy.pem
+    mode http
+    option httplog
+    acl host_www hdr(host) -i www.allnmj.tech
+    use_backend web_backend if host_www
 
-        default_backend www-backend
-
-frontend www-https-frontend
-        bind *:443 ssl crt /etc/letsencrypt/live/www.allnmj.tech/haproxy.pem
-        http-request set-header X-Forwarded-Proto https
-        default_backend www-backend
-
-backend le-certbot-backend
-        server letsencrypt 127.0.0.1:80
-
-backend www-backend
-        balance roundrobin
-        server 806612-web-01 34.203.33.51:80
-        server 806612-web-02 54.234.96.131:80
+# Backend configuration
+backend web_backend
+    mode http
+    server web1 127.0.0.1:80 check  # Adjust backend server and port as needed
+    http-request set-header X-Forwarded-Proto https
+    option http-server-close
