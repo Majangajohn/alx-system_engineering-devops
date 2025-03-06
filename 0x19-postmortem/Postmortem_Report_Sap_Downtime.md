@@ -2,7 +2,7 @@
 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/MitaliSengupta/holberton-system_engineering-devops/master/0x19-postmortem/image.gif" width=100% height=100% />
+<img src="https://github.com/Majangajohn/alx-system_engineering-devops/blob/main/0x19-postmortem/sap-oclock-sap.gif" width=100% height=100% />
 </p>
 
 
